@@ -1,0 +1,76 @@
+@font-face {
+    font-family: "iconfont";
+    src: url('../fonts/iconfont.ttf') format('truetype'); /* chrome¡¢firefox¡¢opera¡¢Safari, Android, iOS 4.2+*/
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon {
+    width: 2em;
+    height: 2em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+}
+
+.icon2 {
+    width: 1.5em;
+    height: 1.5em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+}
+
+.icon-home2:before {
+  content: "\e626";
+}
+
+.icon-tuichu:before {
+  content: "\e624";
+}
+
+.icon-jianxiujilu:before {
+  content: "\e618";
+}
+
+.icon-shouyeweixuanzhong:before {
+  content: "\e61e";
+}
+
+.icon-shouye:before {
+  content: "\e642";
+}
+
+.icon-xundian:before {
+  content: "\e600";
+}
+
+.icon-home:before {
+  content: "\e664";
+}
+
+.icon-xiugaimima:before {
+  content: "\e629";
+}
+
+.icon-yanshoujilu:before {
+  content: "\e60f";
+}
+
+.icon-xundianjilu:before {
+  content: "\e609";
+}
+
+.icon-jianxiu:before {
+  content: "\e62b";
+}
+
+.icon-yanshou:before {
+  content: "\e615";
+}

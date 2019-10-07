@@ -1,0 +1,278 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <title>..........</title>
+    
+    <link rel="stylesheet" type="text/css" href="/css/mui.min.css"/>
+	
+    <link href="/lib/mui/css/iconfont.css" rel="stylesheet" />
+	
+</head>
+<body>
+	
+	<script src="/js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/lib/mui/js/iconfont.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        mui.init();
+    </script>
+    <script src="/js/jqnew/jquery-1.8.3.min.js"></script>
+   
+    <!-- 主界面不动、菜单移动 -->
+    <!-- 侧滑导航根容器 -->
+    <div class="mui-off-canvas-wrap mui-draggable mui-slide-in">
+        <!-- 菜单容器 -->
+        <!-- 主页面容器 -->
+        <div class="mui-inner-wrap">
+            <!-- 主页面标题 -->
+            <header class="mui-bar mui-bar-nav">
+                <h1 class="mui-title">Demo</h1>
+            </header>
+            <nav class="mui-bar mui-bar-tab">
+                <a class="mui-tab-item mui-active" href="/App">
+
+                    <span class="iconfont">
+                        <svg class="icon2" aria-hidden="true">
+                            <use xlink:href="#icon-home"></use>
+                        </svg>
+                    </span>
+                    <div class="mui-media-body">首页</div>
+
+                </a>
+                <a class="mui-tab-item" href="/Accept/My_Map">
+                    <span class="iconfont">
+                        <svg class="icon2" aria-hidden="true">
+                            <use xlink:href="#icon-yanshou"></use>
+                        </svg>
+                    </span>
+                    <div class="mui-media-body">验收</div>
+                </a>
+                <a class="mui-tab-item" href="/Checking/MapShow">
+                    <span class="iconfont">
+                        <svg class="icon2" aria-hidden="true">
+                            <use xlink:href="#icon-xundian"></use>
+                        </svg>
+                    </span>
+                    <div class="mui-media-body">巡点</div>
+
+                </a>
+                <a class="mui-tab-item" href="/CommonChecking/MapShow">
+
+                    <span class="iconfont">
+                        <svg class="icon2" aria-hidden="true">
+                            <use xlink:href="#icon-jianxiu"></use>
+                        </svg>
+                    </span>
+                    <div class="mui-media-body">检修</div>
+                </a>
+            </nav>
+            <div class="mui-content mui-scroll-wrapper">
+                <div class="mui-scroll">
+                    <!-- 主界面具体展示内容 -->
+                    
+
+
+
+<div class="mui-segmented-control">
+    <a class="mui-control-item" href="/Accept/My_Map">我验收的</a>
+    <a class="mui-control-item mui-active" href="javascript:void(0);">非我验收(<font id="f_count" style="font-weight:bold;">0</font>)</a>
+</div>
+
+
+<style type="text/css">
+    /*#container {
+            height: 1024px;
+            margin: 0px;
+            font: 12px Arial;
+        }*/
+
+    html, body, #container {
+        height: 100%;
+        width: 100%;
+    }
+
+    .circle {
+        border-radius: 6px;
+        border: solid 2px silver;
+        width: 100px;
+        min-height: 20px;
+        height: 100%;
+        padding: 4px 2px 2px 2px;
+        text-align: center;
+        line-height: 18px;
+        max-width: 100px;
+        position: relative;
+    }
+
+    .div2 {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background-color: white;
+        width: 50%;
+        height: 100%;
+        z-index: -1;
+    }
+
+    .div3 {
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: white;
+        width: 50%;
+        height: 100%;
+        z-index: -1;
+    }
+</style>
+
+<div id="container" tabindex="0" style="display:block;height:500px;"></div>
+
+<script src="//a.amap.com/jsapi_demos/static/china.js"></script>
+<script type="text/javascript"
+        src="https://webapi.amap.com/maps?v=1.4.15&key=c9098aa98ae092fa8308e465b64b8199&plugin=AMap.MarkerClusterer"></script>
+<script type="text/javascript">
+
+    var mapdata = [];
+	$("#f_count").html(0+"T");
+    /*$.ajax({
+        type: "get",
+        dataType: "json",
+        data: { "rdn": Math.random() },
+        url: "/Accept/Un_MapShowData",
+        async: false,
+        success: function (abc) {
+            mapdata = abc;
+
+            var sumcount = 0;
+            $.each(abc, function (i, item) {
+                sumcount += item.dwcount;
+            });
+            $("#f_count").html(sumcount+"T");
+        }
+    });*/
+
+    var map = new AMap.Map('container', {
+        resizeEnable: true,
+        zoom: 12,
+        //zooms: [2, 18],
+        center: [118.0992507935, 24.5080804576]
+    });
+    var createMarker = function (data, hide) {
+        var div = document.createElement('div');
+        div.className = 'circle';
+
+        div.innerHTML = "<a href=\"/Accept/Un_SelCategory?C_ID="+data.cid+"&C_Name="+data.name+"\"><font color='blue'>" + data.name + "&nbsp;&nbsp;" + data.dwcount + "T</font></a>";
+
+        var div2 = document.createElement('div');
+        div2.className = 'div2';
+        div2.style.backgroundColor = hide ? '#393' : 'white';
+
+
+        div.appendChild(div2);
+        var div3 = document.createElement('div');
+        div3.className = 'div3';
+        div3.style.backgroundColor = hide ? '#393' : 'white';
+        div.appendChild(div3);
+
+        var marker = new AMap.Marker({
+            content: div,
+            title: data.name,
+            position: [data.center.split(',')[1], data.center.split(',')[0]],
+            //zIndex: data.count
+        });
+        marker.data = data;
+        marker.subMarkers = [];
+        if (!hide) {
+            marker.setMap(map)
+        }
+        map.setCenter(marker.getPosition());
+        return marker;
+    }
+    var _onZoomEnd = function (e) {
+        if (map.getZoom() < 9) {
+            for (var i = 0; i < markers.length; i += 1) {
+                map.remove(markers[i])
+            }
+        }
+        if (map.getZoom() >= 9) {
+            map.remove(markers)
+            map.add(markers);
+
+        }
+    }
+    var _onClick = function (e) {
+
+        window.location.href = '/Accept/Un_SelCategory?C_ID=' + e.target.data.cid + '&C_Name=' + e.target.data.name;
+        if (e.target.subMarkers.length) {
+            //map.add(e.target.subMarkers);
+            //map.setFitView(e.target.subMarkers);
+            //map.remove(markers)
+        }
+    }
+    //解释
+    // count 当多个悬浮框重叠时，号码大的显示在最上方
+    // name 位置名称
+    // center 经纬度 经度在前，纬度在后
+    locations = mapdata;
+
+    var markers = []; //province见Demo引用的JS文件
+    for (var i = 0; i < locations.length; i += 1) {
+        var marker = createMarker(locations[i]);
+        markers.push(marker);
+        AMap.event.addListener(marker, 'click', _onClick);
+    }
+    //map.setFitView();
+    AMap.event.addListener(map, 'zoomend', _onZoomEnd);
+
+</script>
+                </div>
+            </div>
+            <div class="mui-off-canvas-backdrop"></div>
+        </div>
+    </div>
+
+</body>
+</html>
+
+<script>
+
+    //解决页面超出 不出现滚动条
+    mui('.mui-scroll-wrapper').scroll();
+
+    //给页面a标签执行跳转
+    mui('body').on('tap', 'a', function () {
+        window.top.location.href = this.href;
+    });
+
+    //移除所有选中项样式
+    mui(".mui-tab-item").each(function(){
+        this.classList.remove('mui-active');
+    });
+
+    var ToolBar = 1;
+    console.log(ToolBar);
+
+    mui(".mui-tab-item").each(function (index) {
+
+        if (index ==1) {
+            this.classList.add('mui-active');
+        }
+    });
+
+
+    //document.getElementsByClassName("mui-tab-item").ccs("mui-hidden");
+
+    //var muitab_items = document.getElementsByClassName("mui-tab-item")
+    ////移除class属性
+    //muitab_items.classList.remove("mui-hidden");
+
+    ////添加class属性
+    //add_div.classList.add("mui-hidden");
+
+
+</script>
